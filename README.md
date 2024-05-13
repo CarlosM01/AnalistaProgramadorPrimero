@@ -1,2 +1,2 @@
 # AnalistaProgramadorPrimero
-Este repositorio tiene la intención de compartir ejercicios y proyectos colaborativos en la carrera de Analista Programador de Inacap
+Este es mi repositorio personal para la universidad, aqui respaldo y comparto proyectos y ejercicios relacionados con mis estudios
