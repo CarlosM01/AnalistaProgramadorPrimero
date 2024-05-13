@@ -15,26 +15,72 @@ Escribe 2 para elegir O
             print('elegiste O')
             return 'O'
         else:
-            print('Por favor no sea weon')
+            print('Utilice una opción válida')
 
-n = elegir_figura()
+def select_side():        
+    while True:
+        side = (input('''
+    Establecer el número de casillas por lado
+    deben el tablero debe ser de al menos 3x3
+    '''))
+        
+        if (side.isdigit() and int(side) >= 3):
+            return int(side)
 
 
-def mostrar_tablero():
-    c1 = c2 = c3 = c4 = c5 = c6= c7 = c8 = c9 = '_'
+def show_table(select=False, side=3):  
+    tableObj = []
+    table = []        
+    for r in range(1,side+1):
+        
+        objCol = []
+        objRow = []
+        cols = []
+        rows = [] 
+        for c in range(1,side+1):
+            
+            # squareOj = {"posX": r, "posY": c, "figure": "_"}
+            squareOj = {"figure": "_"}
+            objCol.append(squareOj)
 
-    print(f'_{c1}_|_{c2}_|_{c3}_')
-    print(f'_{c4}_|_{c5}_|_{c6}_')
-    print(f'_{c7}_|_{c8}_|_{c9}_')
+            square = ''
+            square += str(r)
+            square += str(c)
+            if (select): 
+                square = f'_{square}_'
+            else: square = f'___'
+            cols.append(square)
 
-mostrar_tablero()
+        
+        #objRow.append(objCol)
+        rows.append(cols)
+        rowStr = str(rows)
+        print (rowStr.replace('[', '').replace(']', '').replace(',', '|').replace("'", '').replace(' ', ''))
+        table.append(cols)
+        tableObj.append(objCol)
+        
 
-def escoger_casilla():
+    print(table)
+    print(table[1][1])
+    print(tableObj[1][1])
+
+
+    
+
+
+
+def choose_square():
     while True:
         eleccion =  input('Selccione casilla')
 
         print('_1_|_2_|_3_')
-        print('_4_|_5_|_3_')
-        print('_1_|_2_|_3_')
+        print('_4_|_5_|_6_')
+        print('_7_|_8_|_9_')
 
+
+    
+
+elegir_figura()
+create_table(select=True)
+        
     
