@@ -3,6 +3,8 @@ usuarios = {}
 idcliente = 0
 idusuario = 0
 
+
+
 def menuprincipal():
     print("================================")
     print("   M E N Ú  P R I N C I P A L   ")
@@ -227,7 +229,14 @@ def ingresoUsuarios():
 
 while True:
     menuUsuarios()
-    opUsu = int(input("INGRESE OPCIÓN: "))
+
+    #Evaluar el tipo de dato de entrada
+    while True:
+        try:
+            opUsu = int(input("INGRESE OPCIÓN: "))
+            break
+        except:
+            print('Debe ingresar un número')
 
     if opUsu == 1:
         user = input("Ingrese nombre de usuario: ")
