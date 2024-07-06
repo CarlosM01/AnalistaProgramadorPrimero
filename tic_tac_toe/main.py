@@ -3,43 +3,6 @@ from os import system
 print('Bienvenid@ al gato en python')
 
 
-
-def listIsTheSame(row):
-    firstElement = row[0]
-    for i in row:
-        if i != firstElement:
-            return False
-    return firstElement
-
-def loopRows(side, dictionary):
-    for x in range(side):
-        row = []
-        for y in range(side):
-            pos = str(x)+str(y)
-            icon = dictionary[pos].icon
-            if icon != '_':
-                row.append(icon) 
-            else: break
-        win = listIsTheSame(row)
-        if win == False:
-            break
-        else: return win
-
-def loopCols(side, dictionary):
-    for y in range(side):
-        row = []
-        for x in range(side):
-            pos = str(x)+str(y)
-            icon = dictionary[pos].icon
-            if icon != '_':
-                row.append(icon) 
-            else: break
-        win = listIsTheSame(row)
-        if win == False:
-            break
-        else: return win
-
-
 class Player():
     def __init__(self) -> None:
         pass
@@ -103,7 +66,6 @@ class Table:
                 sre = Square(x, y)                
                 self.data[sre.id] = sre
 
-    # this can be changed to just show, pending to evaluate
     def showId(self):
         self.display = ''
         count = 1
@@ -120,7 +82,7 @@ class Table:
         system('clear')
         return print(self.display)
 
-    #player choose a square 
+
     def setSquare(self, player):
         icon = player.icon
         name = player.name
@@ -134,17 +96,20 @@ class Table:
             else: print('Fuera de rango')
 
     def winner(self):
-<<<<<<< Updated upstream
-        win = loopRows(self.side, self.data)
-        win = loopCols(self.side, self.data)
-=======
         #Horizontales
         for x in range(self.side):
-            figures = []
+            pointsX = 0
+            pointsO = 0
             for y in range(self.side):
                 pos = str(x)+str(y)
-                figures.append(self.data[pos].icon)
-            if figures[]
+                if self.data[pos].icon == 'X':
+                    pointsX += 1
+                if pointsX == 4:
+                    return 'X'  
+                if self.data[pos].icon == 'O':
+                    pointsO += 1
+                if pointsO == 4:
+                    return 'Y'
         
         #Verticales
         for y in range(self.side):
@@ -174,42 +139,24 @@ class Table:
                 pointsO += 1
             if pointsO == 4:
                 return 'O'
->>>>>>> Stashed changes
 
-        if win != None:
-            return win
-        
-        
-        # #Diagonal1
-        # pointsX = 0
-        # pointsO = 0
-        # for i in range(self.side):
-        #     pos = str(i)*2
-        #     if self.data[pos].icon == 'X':
-        #         pointsX += 1
-        #     if pointsX == 4:
-        #         return 'X'  
-        #     if self.data[pos].icon == 'O':
-        #         pointsO += 1
-        #     if pointsO == 4:
-        #         return 'O'
+        #Diagonal2
+        pointsX = 0
+        pointsO = 0
+        for i in self.data:
+            sum = 0
+            for a in self.data[i].id:
+                sum += int(a)
+                if sum == self.side-1:
+                    if self.data[pos].icon == 'X':
+                        pointsX += 1
+                    if pointsX == 4:
+                        return 'X'  
+                    if self.data[pos].icon == 'O':
+                        pointsO += 1
+                    if pointsO == 4:
+                        return 'O'
 
-        # #Diagonal2
-        # pointsX = 0
-        # pointsO = 0
-        # for i in self.data:
-        #     sum = 0
-        #     for a in self.data[i].id:
-        #         sum += int(a)
-        #         if sum == self.side-1:
-        #             if self.data[pos].icon == 'X':
-        #                 pointsX += 1
-        #             if pointsX == 4:
-        #                 return 'X'  
-        #             if self.data[pos].icon == 'O':
-        #                 pointsO += 1
-        #             if pointsO == 4:
-        #                 return 'O'
 
 
 player1 = Player()
@@ -228,11 +175,14 @@ table.setSide()
 table.generate()
 table.showId()
 
-
 while True: 
     table.setSquare(player1)
     table.showId()
-    print(table.winner)
+    win = table.winner()
     table.setSquare(player2)
     table.showId()
-    print(table.winner)
+    win = table.winner()
+    if win == 'X':
+        print('Gana X')
+    if win == 'O':
+        print('Gana O')
